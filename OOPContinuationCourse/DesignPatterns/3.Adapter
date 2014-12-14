@@ -1,0 +1,63 @@
+package CableAdapter;
+public interface CableTypeOne {
+	public void connect();
+	
+	
+	
+}
+package CableAdapter;
+public class CableOne implements CableTypeOne {
+
+	@Override
+	public void connect() {
+		System.out.println("Connecting Cable One");
+		
+	}
+
+}
+
+package CableAdapter;
+public class CableTwo {
+	
+	public void plugIn() {
+		System.out.println("plugging in Cable two");
+	}
+	
+}
+
+package CableAdapter;
+public class CableOneAdapter implements CableTypeOne {
+	CableTwo cable;
+	
+	public CableOneAdapter(CableTwo c) {
+		this.cable = c;
+	}
+
+	@Override
+	public void connect() {
+		cable.plugIn();
+		
+	}
+	
+	
+	
+	
+}
+// enkel mainklass
+package CableAdapter;
+
+public class Main {
+
+	
+	public static void main(String[] args) {
+		System.out.println("Connecting cables");
+		CableOne cOne = new CableOne();
+		CableTwo cTwo = new CableTwo();
+		cOne.connect();
+		System.out.println("Adding adapter to Cable two...");
+		CableOneAdapter cOneAdapter = new CableOneAdapter(cTwo);
+		cOneAdapter.connect();
+		
+	}
+	
+}

@@ -1,0 +1,202 @@
+//Grupp 5 @authors Indigo, Kakan, Dice, DuVaN, 043, Curls
+/**
+ * A test class (╯°□°）╯︵ ┻━┻)
+ */
+public class TestXmasTree{
+
+    public static void main(String[] args){
+        XmasTree ourXmasTree = new WhiteTrashCheapPlasticTree();
+        ourXmasTree = new ChristmasTinsel(ourXmasTree);
+        ourXmasTree = new ChristmasBauble(ourXmasTree);
+        
+        if (ourXmasTree.getPrice() > 100 && ourXmasTree instanceof WhiteTrashCheapPlasticTree){
+            throw new ToExpensiveException();
+        }
+        
+        XmasTree ourSupahExpensiveTree = new Pine();
+        for (int i = 0; i < 1337; i++) {
+            ourSupahExpensiveTree = new ChristmasBauble(ourXmasTree);
+            if (i%2 == 0){
+                ourSupahExpensiveTree = new ChristmasTreeLight(ourSupahExpensiveTree);
+            }
+        }
+        ourSupahExpensiveTree = new SillyStar(ourSupahExpensiveTree);
+        if (ourSupahExpensiveTree.getPrice < 5000) {
+            throw new ToCheapException();
+        }
+
+        System.out.println("Our tree is" + ourXmasTree.getTreeType() + "and costs" + ourXmasTree.getPrice());
+        System.out.println("Our tree is" + ourSupahExpensiveXmasTree.getTreeType() + "and costs" + ourSupahExpensiveXmasTree.getPrice());
+    }//END main
+    
+}//END TestXmasTree
+
+
+/**
+* This is the Component!
+**/
+public abstract class XmasTree(){
+    /**
+     * The type of the XmasTree.
+     **/
+    private String name;
+    
+    public XmasTree(String name){
+        this.name  = name;
+    }
+    
+    public abstract int getPrice();
+    
+    public String getTreeType() {
+        return this.name ;
+    }
+        
+}//END XmasTree
+
+
+/**
+ * This is a ConcreteComponent
+ */
+public class Spruce extends XmasTree{
+    public Spruce(){
+        super("Spruce");
+    }//END constructor
+    
+    public int getPrice(){
+        return 300;
+    }
+    
+}//END Spruce
+
+
+
+/**
+ * This is also a ConcreteComponent
+ */
+public class Fir extends XmasTree{
+    public Fir(){
+        super("Fir tree");
+    }//END constructor
+    
+    public int getPrice(){
+        return 250;
+    }
+    
+}//END Fir
+
+/**
+ * This is also also a ConcreteComponent
+ */
+public class Pine extends XmasTree{
+    public Pine(){
+        super("Pine tree");
+    }//END constructor
+    
+    public int getPrice(){
+        return 800;
+    }
+}//END Pine
+
+
+/**
+ * This is triple also a ConcreteComponent
+ */
+public class WhiteTrashCheapPlasticTree extends XmasTree{
+    public WhiteTrashCheapPlasticTree(){
+        super("Plastic tree");       
+    }//END constructor
+    
+    public int getPrice(){
+        return 20;
+    }
+    
+}//END WhiteTrash..TL;DR
+
+
+/**
+ * The Decorator
+ */
+public abstract TreeDecorator extends XmasTree{
+    
+    protected XmasTree decoratedTree;
+    
+}//END decorator
+
+
+/**
+ * This is a ConcreteDecorator
+ */ 
+public class BaubleOrnaments extends TreeDecorator{
+    
+    public BaubleOrnaments(XmasTree tree){
+        decoratedTree = tree;
+    }
+
+    private int chargeBauble() { //addedBehaviour()-metoden
+        return 5;
+    }
+    
+    @Override
+    public int getPrice(){
+        return decoratedTree.getPrice() + chargeBauble();
+    
+}
+
+
+/**
+ * This is also a ConcreteDecorator
+ */ 
+public class SillyStar extends TreeDecorator{
+    
+    public SillyStar(XmasTree tree){
+        decoratedTree = tree;
+    }
+    
+    private int chargeSillyStar(){
+        return 35;
+    } 
+    
+    @Override
+    public int getPrice(){
+        return decoratedTree.getPrice() + chargeSillyStar();
+    }
+    
+}//END SillyStar
+
+
+/**
+ * This is double also a ConcreteDecorator
+ */ 
+public class ChristmasTinsel extends TreeDecorator{
+    
+    public ChristmasTinsel(XmasTree tree){
+        decoratedTree=tree;
+    }
+    
+    private int chargeChristmasTinsel(){
+        return 20;
+    } 
+    
+    @Override
+    public int getPrice(){
+        return decoratedTree.getPrice() + chargeChrismtasTinsel();
+    }
+
+}
+
+/**
+ * This is triple also a ConcreteDecorator
+ */ 
+public class ChristmasTreeLights extends TreeDecorator{
+    public ChristmasTreeLights(XmasTree tree){
+        decoratedTree=tree;
+    }
+    private int chargeTreeLights(){
+        return 35;
+    } 
+    
+    @Override
+    public int getPrice(){
+        return decoratedTree.getPrice() + chargeTreeLights();
+    }
+}

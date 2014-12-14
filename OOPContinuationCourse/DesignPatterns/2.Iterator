@@ -1,0 +1,26 @@
+import java.util.ArrayList;
+import java.util.Iterator;
+
+
+public class IteratorTest {
+
+	public static void main(String[] args) {
+		ArrayList<Integer> strand = new ArrayList<>();
+
+		for ( int mussla = 0; mussla<11; mussla++){
+			strand.add(mussla);
+		}
+
+		Iterator<Integer> krabba = strand.listIterator();
+
+		while (krabba.hasNext()){
+			krabba.next();
+			krabba.remove();
+			if (krabba.hasNext()){
+				System.out.print(krabba.next());
+			}
+		}
+
+
+	}
+}
